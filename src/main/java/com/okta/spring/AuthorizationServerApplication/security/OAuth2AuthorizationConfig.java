@@ -42,14 +42,14 @@ public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
         return new JdbcTokenStore(dataSource);
     }
 
-//    @Bean
-//    @Primary
-//    public DefaultTokenServices tokenServices() {
-//        DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
-//        defaultTokenServices.setTokenStore(tokenStore());
-//        defaultTokenServices.setSupportRefreshToken(true);
-//        return defaultTokenServices;
-//    }
+    @Bean
+    @Primary
+    public DefaultTokenServices tokenServices() {
+        DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
+        defaultTokenServices.setTokenStore(tokenStore());
+        defaultTokenServices.setSupportRefreshToken(true);
+        return defaultTokenServices;
+    }
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {

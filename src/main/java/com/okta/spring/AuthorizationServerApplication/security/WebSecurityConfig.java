@@ -39,16 +39,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.requestMatchers()
+        http
+            .csrf().disable()
+            .requestMatchers()
             .antMatchers("/login", "/oauth/authorize")
                 .and()
             .authorizeRequests()
             .anyRequest().authenticated()
             .and()
                 .formLogin().permitAll()
-                .defaultSuccessUrl("http://localhost:8082")
-           // .and().sessionManagement()
-               // .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+               // .defaultSuccessUrl("http://localhost:8082")
+            .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             ;
     }
 
