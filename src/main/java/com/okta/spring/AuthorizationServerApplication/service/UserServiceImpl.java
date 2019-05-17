@@ -10,9 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.oauth2.provider.ClientDetails;
-import org.springframework.security.oauth2.provider.ClientDetailsService;
-import org.springframework.security.oauth2.provider.ClientRegistrationException;
 import org.springframework.stereotype.Service;
 
 import javax.security.auth.login.AccountException;
@@ -21,7 +18,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
-public class UserServiceImpl implements UserService, UserDetailsService, ClientDetailsService {
+public class UserServiceImpl implements UserService, UserDetailsService {
 
 
     @Autowired
@@ -60,8 +57,5 @@ public class UserServiceImpl implements UserService, UserDetailsService, ClientD
         return user;
     }
 
-    @Override
-    public ClientDetails loadClientByClientId(String clientId) throws ClientRegistrationException {
-        return null;
-    }
+
 }

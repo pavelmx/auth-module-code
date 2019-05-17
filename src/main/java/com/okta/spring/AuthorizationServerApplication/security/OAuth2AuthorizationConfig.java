@@ -42,21 +42,15 @@ public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
         return new JdbcTokenStore(dataSource);
     }
 
-    @Bean
-    @Primary
-    public DefaultTokenServices tokenServices() {
-        DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
-        defaultTokenServices.setTokenStore(tokenStore());
-        defaultTokenServices.setSupportRefreshToken(true);
-        return defaultTokenServices;
-    }
+
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints
                 .authenticationManager(this.authenticationManager)
                 .tokenStore(tokenStore())
-                .userDetailsService(userDetailsService);
+                .userDetailsService(userDetailsService)
+                ;
     }
 
     @Override
@@ -76,5 +70,6 @@ public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
     public void authSuccessEventListener(AuthenticationSuccessEvent authorizedEvent) throws URISyntaxException {
         System.out.println("User Oauth2 login success as " + authorizedEvent.getAuthentication().getName());
     }
+
 
 }
