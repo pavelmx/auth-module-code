@@ -1,0 +1,25 @@
+server:
+    port: 8085
+    servlet:
+        context-path: /auth
+
+spring:
+    jpa:
+        properties:
+            hibernate:
+                temp:
+                    use_jdbc_metadata_defaults: false
+                default_schema: authschema
+        database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+
+    datasource:
+        driverClassName: org.postgresql.Driver
+        url: jdbc:postgresql://localhost:5432/mydb
+        username: myuser
+        password: 123
+
+    liquibase:
+        change-log: classpath:changelog/db.changelog-master.xml
+
+security:
+    enabled: false

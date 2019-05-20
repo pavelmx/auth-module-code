@@ -2,6 +2,7 @@ package com.okta.spring.AuthorizationServerApplication.security;
 
 import com.okta.spring.AuthorizationServerApplication.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -26,16 +27,19 @@ import javax.sql.DataSource;
 @Order(1)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Value("${security.enabled}")
+    private boolean security;
+
     @Autowired
     private DataSource dataSource;
 
     @Bean
-    public AccessTokenService tokenService(){
+    public AccessTokenService tokenService() {
         return new AccessTokenService();
     }
 
     @Bean
-    public OAuth2AuthenticationManager oauth2authenticationManager()  {
+    public OAuth2AuthenticationManager oauth2authenticationManager() {
         OAuth2AuthenticationManager authManager = new OAuth2AuthenticationManager();
         authManager.setClientDetailsService(clientDetailsService());
         authManager.setTokenServices(tokenService());
@@ -47,7 +51,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public Filter myOAuth2Filter()  {
+    public Filter myOAuth2Filter() {
         OAuth2AuthenticationProcessingFilter filter = new OAuth2AuthenticationProcessingFilter();
         filter.setAuthenticationManager(oauth2authenticationManager());
         filter.setStateless(false);
@@ -76,19 +80,30 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-            .csrf().disable()
-            .requestMatchers()
-            .antMatchers( "/login", "/oauth/authorize")
-                .and()
-            .authorizeRequests()
-            .anyRequest().authenticated()
-            .and()
-                .formLogin().permitAll()
-                .successHandler(myAuthenticationSuccessHandler())
-            .and()
-                .addFilterBefore(myOAuth2Filter(), BasicAuthenticationFilter.class)
-            .logout().deleteCookies("JSESSIONID").invalidateHttpSession(true);
+        if (security) {
+            http
+                    .csrf().disable()
+                    .requestMatchers()
+                    .antMatchers("/login", "/oauth/authorize")
+                    .and()
+                    .authorizeRequests()
+                    .anyRequest().authenticated()
+                    .and()
+                    .formLogin().permitAll()
+                    .successHandler(myAuthenticationSuccessHandler())
+                    .and()
+                    .addFilterBefore(myOAuth2Filter(), BasicAuthenticationFilter.class);
+        } else {
+            http
+                    .csrf().disable()
+                    .authorizeRequests()
+                    .anyRequest().permitAll()
+                    .and()
+                    .formLogin().permitAll()
+                    .successHandler(myAuthenticationSuccessHandler())
+                    .and()
+                    .addFilterBefore(myOAuth2Filter(), BasicAuthenticationFilter.class);
+        }
     }
 
     @Override

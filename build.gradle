@@ -15,11 +15,11 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-//	implementation 'org.springframework.security.oauth:spring-security-oauth2:2.3.3.RELEASE'
-//	implementation 'org.glassfish.jaxb:jaxb-runtime'
+	implementation 'org.liquibase:liquibase-core'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	runtimeOnly 'org.postgresql:postgresql:42.2.5'
 
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5:3.0.4.RELEASE'
 	compile 'org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.1.4.RELEASE'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
