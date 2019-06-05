@@ -13,14 +13,14 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "role", schema = "authschema")
+@Table(name = "role", schema = "auth_schema")
 public class Role implements Serializable  {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator", schema = "public", sequenceName = "sq_role")
+    @SequenceGenerator(name = "sequenceGenerator", schema = "auth_schema", sequenceName = "sq_role")
     private Long id;
 
     @NotBlank

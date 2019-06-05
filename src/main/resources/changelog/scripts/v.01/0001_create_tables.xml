@@ -50,7 +50,7 @@
 
 
     <changeSet id="create_table_user" author="oadmin">
-        <createTable schemaName="authschema" tableName="user">
+        <createTable  tableName="user">
             <column name="id" type="int"  defaultValueSequenceNext="sq_user">
                 <constraints primaryKey="true" primaryKeyName="pk_user_id" nullable="false"/>
             </column>
@@ -69,7 +69,7 @@
 
 
     <changeSet id="create_table_role" author="oadmin">
-        <createTable schemaName="authschema" tableName="role">
+        <createTable  tableName="role">
             <column name="id" type="int" defaultValueSequenceNext="sq_role">
                 <constraints primaryKey="true" primaryKeyName="pk_role_id" nullable="false"/>
             </column>
@@ -85,7 +85,7 @@
 
 
     <changeSet id="create_table_user_role" author="oadmin">
-        <createTable schemaName="authschema" tableName="user_role">
+        <createTable tableName="user_role">
             <column name="user_id" type="int">
                 <constraints nullable="false"/>
             </column>
@@ -96,22 +96,18 @@
 
         <addForeignKeyConstraint
                 constraintName="fk_user_role_user"
-                baseTableSchemaName="authschema"
                 baseTableName="user_role"
                 baseColumnNames="user_id"
                 referencedTableName="user"
                 referencedColumnNames="id"
-                referencedTableSchemaName="authschema"
                 deleteCascade="true"/>
 
         <addForeignKeyConstraint
                 constraintName="fk_user_role_role"
-                baseTableSchemaName="authschema"
                 baseTableName="user_role"
                 baseColumnNames="role_id"
                 referencedTableName="role"
                 referencedColumnNames="id"
-                referencedTableSchemaName="authschema"
                 deleteCascade="true"/>
 
     </changeSet>

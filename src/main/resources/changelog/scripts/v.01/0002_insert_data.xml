@@ -6,14 +6,14 @@
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <changeSet id="insert_to_role" author="oadmin" >
-        <insert schemaName="authschema" tableName="role">
+        <insert tableName="role">
             <column name="id" value="1"/>
             <column name="name" value="ROLE_ADMIN"/>
         </insert>
     </changeSet>
 
     <changeSet id="insert_to_user" author="oadmin" >
-        <insert schemaName="authschema" tableName="user">
+        <insert tableName="user">
             <column name="id"  value="1"/>
             <column name="username" value="admin"/>
             <column name="password" value="$2a$10$UvgQuK1Qr9mLvgrcsodOkOZ09TKGbSBfaVjuOtczTJPtie3kPzxXC"/>
@@ -22,7 +22,7 @@
     </changeSet>
 
     <changeSet id="insert_to_user_role" author="oadmin" >
-        <insert schemaName="authschema"  tableName="user_role">
+        <insert tableName="user_role">
             <column name="user_id" value="1"/>
             <column name="role_id" value="1"/>
 

@@ -18,7 +18,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Entity
-@Table(name = "user", schema = "authschema",
+@Table(name = "user", schema = "auth_schema",
         uniqueConstraints = {@UniqueConstraint(columnNames = {"username"})})
 public class User implements UserDetails, Serializable {
 
@@ -26,7 +26,7 @@ public class User implements UserDetails, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator", schema = "public", sequenceName = "sq_user")
+    @SequenceGenerator(name = "sequenceGenerator", schema = "auth_schema", sequenceName = "sq_user")
     private Long id;
 
     @NotBlank
