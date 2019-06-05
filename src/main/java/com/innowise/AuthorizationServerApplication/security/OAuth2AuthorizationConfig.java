@@ -16,6 +16,8 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import java.net.URISyntaxException;
 
@@ -66,7 +68,7 @@ public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
 
     @EventListener
     public void authSuccessEventListener(AuthenticationSuccessEvent authorizedEvent) throws URISyntaxException {
-        System.out.println("User Oauth2 login success as " + authorizedEvent.getAuthentication().getName());
+        System.out.println("User Oauth2 login success as " + authorizedEvent.getAuthentication().getPrincipal());
     }
 
 

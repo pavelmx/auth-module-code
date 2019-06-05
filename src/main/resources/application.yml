@@ -22,4 +22,4 @@ spring:
         change-log: classpath:changelog/db.changelog-master.xml
 
 security:
-    enabled: false
+    enabled: true

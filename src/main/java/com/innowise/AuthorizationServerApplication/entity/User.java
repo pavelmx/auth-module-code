@@ -1,8 +1,5 @@
 package com.innowise.AuthorizationServerApplication.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,6 +26,8 @@ public class User implements UserDetails, Serializable {
     @SequenceGenerator(name = "sequenceGenerator", schema = "auth_schema", sequenceName = "sq_user")
     private Long id;
 
+    private Long employeeId;
+
     @NotBlank
     private String username;
 
@@ -51,6 +50,14 @@ public class User implements UserDetails, Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(Long employeeId) {
+        this.employeeId = employeeId;
     }
 
     public void setUsername(String username) {

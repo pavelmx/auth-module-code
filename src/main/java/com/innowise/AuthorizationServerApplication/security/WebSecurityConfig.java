@@ -73,6 +73,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserServiceImpl userDetailsService;
 
+    @Bean
+    public AuthenticationSuccessHandler myAuthenticationSuccessHandler() {
+        return new MySimpleUrlAuthenticationSuccessHandler();
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         if (security) {
@@ -85,6 +90,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .anyRequest().authenticated()
                     .and()
                     .formLogin().permitAll()
+                    .successHandler(myAuthenticationSuccessHandler())
                     .and()
                     .addFilterBefore(myOAuth2Filter(), BasicAuthenticationFilter.class);
         } else {
@@ -94,6 +100,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .anyRequest().permitAll()
                     .and()
                     .formLogin().permitAll()
+                    .successHandler(myAuthenticationSuccessHandler())
                     .and()
                     .addFilterBefore(myOAuth2Filter(), BasicAuthenticationFilter.class);
         }
